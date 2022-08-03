@@ -122,7 +122,8 @@ public class GameDaoImpl implements GameDao {
         Connection conn = null;
 
         try {
-            String sql = "UPDATE `game` SET `gusl` = ? WHERE `id` = ?";
+            String sql = "UPDATE `game` SET `gusl`=? WHERE  `id`=?";
+
             conn = dbConn();
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, gusl);

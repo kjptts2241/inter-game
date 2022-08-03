@@ -69,13 +69,14 @@ public class OddEven {
     }
 
     // 구슬 저장 여부
-    public void gusl_save() {
+    public void gusl_save(int mylife) {
         while(true) {
             System.out.print("게임 데이터를 저장 하시겠습니까? (Y/N) >> ");
             String marbleSave = sc.next();
 
             if (marbleSave.equalsIgnoreCase("Y")) {
-                dao.update(mylife, id);
+                System.out.println(mylife);
+                dao.update(id, mylife);
                 System.out.println("게임 종료합니다.");
                 break;
 
@@ -137,7 +138,7 @@ public class OddEven {
             } while (mylife > 0 && yourlife > 0); //do
 
             victory();
-            gusl_save();
+            gusl_save(mylife);
 
         } catch (Exception e) {
             System.out.println("값을 똑바로 입력해주세요.");
