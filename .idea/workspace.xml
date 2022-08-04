@@ -5,9 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1d8e48f5-1691-4f25-98b5-e0ee2a8e0721" name="Changes" comment="인터페이스 버전">
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/TestList.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/GameDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GameDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/GameDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GameDaoImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -64,7 +65,7 @@
       <recent name="C:\dev\java\inter_game" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.TestList">
     <configuration name="MainClass" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="MainClass" />
       <module name="inter_game.main" />
@@ -72,8 +73,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TestList" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="TestList" />
+      <module name="inter_game.main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.TestList" />
         <item itemvalue="Application.MainClass" />
       </list>
     </recent_temporary>
@@ -101,7 +110,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659517421522</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="인터페이스 버전">
+      <created>1659579000437</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1659579000437</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

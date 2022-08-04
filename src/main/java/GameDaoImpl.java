@@ -1,4 +1,6 @@
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameDaoImpl implements GameDao {
     private PreparedStatement pstmt = null;
@@ -152,5 +154,31 @@ public class GameDaoImpl implements GameDao {
             DBclose();
         }
 
+    }
+
+    @Override
+    public List<GameDto> findAll() {
+        List<GameDto> list = new ArrayList<>(); // 외부로 전달 시킬 리스트
+        ResultSet rs = null;
+
+        try {
+            String sql = "SELECT * FROM `game`";
+            pstmt = conn.prepareStatement(sql);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                GameDto dto = new GameDto();
+                dto.setId(rs.getInt("id"));
+                dto.setGusl(rs.getInt("gusl"));
+                dto.setName(rs.getString("name"));
+                dto.setUserId(rs.getString("userid"));
+                dto.setUserPw(rs.getString("userpw"));
+                list.add(dto); // list에 dto를 담는다
+            }
+        } catch (SQLException e) {
+            System.out.println("error: " + e);
+        } finally {
+            DBclose();
+        }
+        return list;
     }
 }

@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -6,12 +7,24 @@ public class Game {
     String idCheck; // 아이디 체크
     String pwCheck; // 패스워드 체크
     Scanner scanner = new Scanner(System.in);
-    GameDaoImpl dao = new GameDaoImpl();
+    GameDao dao = new GameDaoImpl();
     GameDto dto;
 
     public GameDto intro(){
         System.out.println("=======================================");
         System.out.println("오징어 게임에 오신 것을 환영합니다.");
+        List<GameDto> list = dao.findAll();
+        System.out.println("현재 가입 되있는 유저 목록");
+        System.out.println("=======================================");
+        int i = 0; // 유저 번호
+        for (GameDto d: list) {
+            System.out.println("번호 : " +  i++);
+            System.out.println("아이디 : " + d.getUserId());
+            System.out.println("비밀번호 : " + d.getUserPw());
+            System.out.println("이름 : " + d.getName());
+            System.out.println("구슬 갯수 : " + d.getGusl());
+            System.out.println("=======================================");
+        }
         System.out.print("아이디가 있습니까? (Y/N) >> ");
         userCheck = scanner.next();
 
