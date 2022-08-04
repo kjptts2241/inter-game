@@ -34,7 +34,7 @@ public class Game {
     }
 
     // 회원가입 메소드
-    public GameDto register(){
+    public void register(){
         System.out.println("회원 가입을 진행하겠습니다.");
         System.out.print("아이디 입력 >> ");
         String userId = scanner.next();
@@ -49,8 +49,6 @@ public class Game {
         dto.setName(name);
 
         dao.save(dto);
-
-        return dto;
     }
 
     // 로그인 메소드
@@ -63,6 +61,7 @@ public class Game {
         pwCheck = scanner.next();
 
         GameDto dto = dao.findIdPw(idCheck, pwCheck);
+
         if (dto == null) {
             System.out.println("로그인에 실패하셨습니다.");
             start();

@@ -1,6 +1,8 @@
 import java.sql.*;
 
 public class GameDaoImpl implements GameDao {
+    private PreparedStatement pstmt = null;
+    private Connection conn = dbConn();
 
     public Connection dbConn() {
         final String driver = "org.mariadb.jdbc.Driver";
@@ -29,14 +31,26 @@ public class GameDaoImpl implements GameDao {
         return conn;
     }
 
+    public void DBclose() {
+        try {
+            if (pstmt != null) {
+                pstmt.close();
+            }
+
+            if (conn != null && !conn.isClosed()) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void save(GameDto dto) {
-        PreparedStatement pstmt = null;
-        Connection conn = null;
 
         try {
             String sql = "INSERT INTO `game` (`userid`, `userpw`, `name`) VALUES (?, ?, ?)";
-            conn = dbConn();
+
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, dto.getUserId());
             pstmt.setString(2, dto.getUserPw());
@@ -53,31 +67,19 @@ public class GameDaoImpl implements GameDao {
         } catch (SQLException e) {
             System.out.println("error: " + e);
         } finally {
-            try {
-                if (pstmt != null) {
-                    pstmt.close();
-                }
-
-                if (conn != null && !conn.isClosed()) {
-                    conn.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            DBclose();
         }
     }
 
     @Override
     public GameDto findIdPw(String userId, String userPw) {
-        PreparedStatement pstmt = null;
-        Connection conn = null;
         ResultSet rs = null;
 
         GameDto dto = new GameDto();
 
         try {
             String sql = "SELECT * FROM `game` WHERE userid = ? AND userpw = ?";
-            conn = dbConn();
+
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, userId);
             pstmt.setString(2, userPw);
@@ -95,36 +97,21 @@ public class GameDaoImpl implements GameDao {
                 System.out.println("아이디가 존재하지 않습니다.");
                 System.out.println("다시 입력해주세요.");
             }
+
         } catch (SQLException e) {
             System.out.println("error: " + e);
         } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (pstmt != null) {
-                    pstmt.close();
-                }
-
-                if (conn != null && !conn.isClosed()) {
-                    conn.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            DBclose();
         }
         return dto;
     }
 
     @Override
     public void update(int id, int gusl) {
-        PreparedStatement pstmt = null;
-        Connection conn = null;
 
         try {
-            String sql = "UPDATE `game` SET `gusl`=? WHERE  `id`=?";
+            String sql = "UPDATE `game` SET `gusl` = ?, update_at = NOW() WHERE  `id` = ?";
 
-            conn = dbConn();
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, gusl);
             pstmt.setInt(2, id);
@@ -139,29 +126,17 @@ public class GameDaoImpl implements GameDao {
         } catch (SQLException e) {
             System.out.println("error: " + e);
         } finally {
-            try {
-                if (pstmt != null) {
-                    pstmt.close();
-                }
-
-                if (conn != null && !conn.isClosed()) {
-                    conn.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            DBclose();
         }
 
     }
 
     @Override
     public void delete(int id) {
-        PreparedStatement pstmt = null;
-        Connection conn = null;
 
         try {
             String sql = "DELETE FROM `game` WHERE  `id` = ?";
-            conn = dbConn();
+
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id);
             int result = pstmt.executeUpdate();
@@ -174,17 +149,7 @@ public class GameDaoImpl implements GameDao {
         } catch (SQLException e) {
             System.out.println("error: " + e);
         } finally {
-            try {
-                if (pstmt != null) {
-                    pstmt.close();
-                }
-
-                if (conn != null && !conn.isClosed()) {
-                    conn.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            DBclose();
         }
 
     }
